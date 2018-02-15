@@ -1,0 +1,8 @@
+echo  "user name is :$USER "
+echo  "login name is :$LOGNAME"
+echo  "current working shell :$SHELL"
+echo  "home directory is : $HOME "
+echo  "operating system type is : $OSTYPE "
+echo  "current path is :$PATH "
+echo  "current directory is: $(pwd)"
+echo  "the number of users currently logged in is :`who | wc -l`"
