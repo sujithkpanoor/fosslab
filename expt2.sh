@@ -1,0 +1,10 @@
+echo "OS details is :"
+echo -e "$(uname -a) \n"
+echo "all available shells are follows :"
+echo -e "$(grep '^[^#]' /etc/shells)\n"
+echo "Computer CPU Information:"
+echo " $(cat /proc/cpuinfo)"
+echo -e "\nmemory information is:\n $(cat /proc/meminfo)"
+echo -e "\nHard disk information is :\n$(df -h)\n"
+echo -e "the file system(mounted):\n$(cat /proc/mounts)"
+
