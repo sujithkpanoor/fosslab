@@ -1,24 +1,18 @@
 #!/bin/bash
-
-#converting pdf file to text file
 pdftotext -layout s1_result.pdf s1_result.txt
 pdftotext -layout s2_result.pdf s2_result.txt
 
-#removing spaces tabs commas from text files
 tr -d '\040\011\012\015\014\054'< s1_result.txt> temp1.txt
 tr -d '\040\011\012\015\014\054'< s2_result.txt>temp2.txt
-
-#To make each row in seperate lines 
+ 
 sed -i 's/MDL16CS/\nMDL16CS/g' temp1.txt
 sed -i "s/ELECTRONICS/\nELECTRONICS/g" temp1.txt
 sed -i 's/MDL16CS/\nMDL16CS/g' temp2.txt
 sed -i "s/ELECTRONICS/\nELECTRONICS/g" temp2.txt
 
-#To remove the grades of all other branches
 grep MDL16CS temp1.txt > grade_s1.txt
 grep MDL16CS temp2.txt > grade_s2.txt
 
-#To remove names of subjects with space
 sed -i "s/MA101(/ /g" grade_s1.txt
 sed -i "s/PH100(/ /g" grade_s1.txt
 sed -i "s/BE110(/ /g" grade_s1.txt
@@ -41,10 +35,6 @@ sed -i "s/CS100(/ /g" grade_s2.txt
 sed -i "s/CS120(/ /g" grade_s2.txt
 sed -i "s/)/ /g" grade_s2.txt
 
-#To remove grades with gradepoint
-
-
-
 sed -i "s/O/10/g" grade_s1.txt
 sed -i "s/A+/9/g" grade_s1.txt
 sed -i "s/A/8.5/g" grade_s1.txt
@@ -66,14 +56,11 @@ sed -i "s/F/0/g" grade_s2.txt
 sed -i "s/166/16C/g" grade_s1.txt
 sed -i "s/166/16C/g" grade_s2.txt
 
-#To remove the electronics from the end
 grep -v "ELE6TR10NI6S" grade_s1.txt > temp1.txt
 grep -v "ELE6TR10NI6S" grade_s1.txt > temp2.txt
 
 >s1GPA.txt
 >s2GPA.txt
-
-#To read the file line by line
 
 mapfile < grade_s1.txt
 
@@ -102,8 +89,6 @@ done
 paste S2CS.txt s2GPA.txt> s2SGPA.txt
 
 paste s2SGPA.txt s1SGPA.txt | awk '{printf "%s  %.1f\n",$1,($11 *24 + $22 *23)/47}'> CGPA.txt
-
-#To seperate the cgpa of c4B students
 
 join -1 6 -2 1 csb_list.txt CGPA.txt > c4Bcgpa.txt
 
