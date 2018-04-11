@@ -1,0 +1,3 @@
+ifconfig -a
+ifconfig wlp3s0 192.168.1.208 netmask 255.255.255.0
+route add default gw 192.168.08
